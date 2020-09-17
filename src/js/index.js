@@ -9,9 +9,6 @@ import '../scss/main.scss';
 const wrapper = document.querySelector(".wrapper");
 wrapper.style.height = `${window.innerHeight}px`;
 
-// const items = JSON.parse(JSON.stringify(localStorage));
-// console.log(items);
-
 const counter = document.querySelector(".counter__number");
 const history = document.querySelector(".content__history");
 const historyList = document.querySelector(".history__list");
@@ -22,12 +19,7 @@ const historyButton = document.querySelector(".button-history");
 
 const today = new Date().toISOString().slice(0, 10);
 
-let historyArray = [];
 let counterNumber;
-
-if (!JSON.parse(localStorage.getItem('history'))) {
-    localStorage.setItem('history', JSON.stringify(historyArray));
-}
 
 const counterReload = () => {
     counter.textContent = counterNumber;
@@ -37,14 +29,23 @@ const storageReload = () => {
     localStorage.setItem(today, JSON.stringify(counterNumber));
 }
 
+const historyDates = () => {
+    const storageKeys = Object.keys(JSON.parse(JSON.stringify(localStorage)));
+    let storageDatesOnly = [];
+    for (let i = 0; i < storageKeys.length; i++) {
+        if (storageKeys[i].includes("2020")) storageDatesOnly.push(storageKeys[i]);
+    }
+    return storageDatesOnly.sort((a, b) => {
+        const dateA = new Date(a);
+        const dateB = new Date(b);
+        return dateB - dateA;
+    });
+}
+
 if (JSON.parse(localStorage.getItem(today))) {
-    historyArray = JSON.parse(localStorage.getItem('history'));
     counterNumber = JSON.parse(localStorage.getItem(today));
     counterReload();
 } else {
-    historyArray = JSON.parse(localStorage.getItem('history'));
-    historyArray.push(today);
-    localStorage.setItem('history', JSON.stringify(historyArray));
     counterNumber = 0;
     counterReload();
 }
@@ -64,7 +65,7 @@ removeButton.addEventListener("click", () => {
 historyButton.addEventListener("click", () => {
     history.classList.add("history--active");
 
-    historyArray.forEach(day => {
+    historyDates().forEach(day => {
         const amount = JSON.parse(localStorage.getItem(day));
 
         const historyItem = document.createElement("li");
