@@ -9,6 +9,8 @@ import '../scss/main.scss';
 const wrapper = document.querySelector(".wrapper");
 wrapper.style.height = `${window.innerHeight}px`;
 
+
+const headerTitle = document.querySelector(".header__title");
 const counter = document.querySelector(".counter__number");
 const history = document.querySelector(".content__history");
 const historyList = document.querySelector(".history__list");
@@ -20,6 +22,8 @@ const historyButton = document.querySelector(".button-history");
 const today = new Date().toISOString().slice(0, 10);
 
 let counterNumber;
+
+let historyLoad = false;
 
 const counterReload = () => {
     counter.textContent = counterNumber;
@@ -65,22 +69,31 @@ removeButton.addEventListener("click", () => {
 historyButton.addEventListener("click", () => {
     history.classList.add("history--active");
 
-    historyDates().forEach(day => {
-        const amount = JSON.parse(localStorage.getItem(day));
+    if (!historyLoad) {
+        historyLoad = true;
 
-        const historyItem = document.createElement("li");
-        const historyDay = document.createElement("p");
-        const historyNumber = document.createElement("p");
+        historyDates().forEach(day => {
 
-        historyList.appendChild(historyItem);
-        historyItem.appendChild(historyDay);
-        historyItem.appendChild(historyNumber);
+            const amount = JSON.parse(localStorage.getItem(day));
 
-        historyItem.classList.add("history__item");
-        historyDay.classList.add("history__day");
-        historyNumber.classList.add("history__number");
+            const historyItem = document.createElement("li");
+            const historyDay = document.createElement("p");
+            const historyNumber = document.createElement("p");
 
-        historyDay.textContent = day;
-        historyNumber.textContent = amount;
-    });
+            historyList.appendChild(historyItem);
+            historyItem.appendChild(historyDay);
+            historyItem.appendChild(historyNumber);
+
+            historyItem.classList.add("history__item");
+            historyDay.classList.add("history__day");
+            historyNumber.classList.add("history__number");
+
+            historyDay.textContent = day;
+            historyNumber.textContent = amount;
+        });
+    }
+})
+
+headerTitle.addEventListener("click", () => {
+    history.classList.remove("history--active");
 })
