@@ -1,18 +1,36 @@
-![cover](https://cotenfrontend.pl/img/cover.png)
+# hydrapp
+Count glasses of water drinking during the day and check history.
 
-# WTF Webpack Starter Kit 
+## About
+Simple PWA application using localStorage. Based on wtf-webpack-starter.
+With this app I'd like to learn how to use localStorage and how PWA works.
 
-Simple toolkit for your static websites development.
+## Technologies and tools
+- HTML5
+- CSS3 (SCSS, Flexbox)
+- webpack
+- npm
+- Git
+- Figma
 
-## How to use it?
+## Status
+Project is currently in progress.
 
-Click on `Use this template` button to generate a new repository based on this starter kit. After that clone it to your computer, go to the project directory in console and type `npm install`.
+To do:
+- implement PWA
+- add setting section
+- implement design
+- adjust to desktops
+- OpenGraph - add suitable metadata
 
-## Available scripts
+## Setup
+To run this project you need Node.js with npm installed.
+```
+npm install
+npm run start
+```
 
-`npm run start` - runs development mode
+## Live
+[hydrapp live](https://karolryska.github.io/hydrapp/)
 
-`npm run build` - runs build process for production
-
-`npm run publish` - runs build process and publish the page using `gh-pages` branch
 
