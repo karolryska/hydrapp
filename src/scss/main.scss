@@ -1,5 +1,5 @@
 @import "~normalize.css";
-
+@import "node_modules/hamburgers/_sass/hamburgers/hamburgers.scss";
 @import "_variables";
 
 * {
@@ -22,23 +22,57 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 
   &__title {
     margin: 0;
     color: white;
     font-family: $lato;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 400;
     letter-spacing: 6px;
   }
 
   &__menu-button {
-    height: 30px;
-    width: 40px;
-    background-color: white;
-    border: none;
+    cursor: pointer;
   }
+
 }
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  // height: 100vh;
+  width: 100vw;
+  display: block;
+  background-color: blue;
+  z-index: -2;
+  transform: translateX(100%);
+  transition: .4s;
+
+  padding: 20vh 30px;
+
+  &--active {
+    transform: translateX(0);
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  &__link {
+    text-decoration: none;
+    font-family: $lato;
+    font-size: 24px;
+    color: white;
+    padding: 0;
+    margin: 0 0 6vh;
+  }
+
+
+}
+
+
 
 .content {
   height: 100%;
@@ -132,6 +166,7 @@
   width: 100vw;
   background-color: $blue;
   display: none;
+  z-index: 200;
 
   &--active {
     display: block;
