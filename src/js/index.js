@@ -7,22 +7,32 @@ import '../scss/main.scss';
 /* place your code below */
 
 const wrapper = document.querySelector(".wrapper");
-wrapper.style.height = `${window.innerHeight}px`;
-
 
 const headerTitle = document.querySelector(".header__title");
+const menuButton = document.querySelector(".header__menu-button");
+
+const nav = document.querySelector(".nav");
+
 const counter = document.querySelector(".counter__number");
-const history = document.querySelector(".content__history");
-const historyList = document.querySelector(".history__list");
+
+const history = document.querySelector(".section--history");
+const settings = document.querySelector(".section--settings");
 
 const addButton = document.querySelector(".button--add");
 const removeButton = document.querySelector(".button--remove");
-const historyButton = document.querySelector(".button-history");
+
+const historyLink = document.querySelector(".nav__link--history");
+const settingsLink = document.querySelector(".nav__link--settings");
+
+const backButtonHistory = document.querySelector(".section__arrow--history");
+const backButtonSettings = document.querySelector(".section__arrow--settings");
+
+wrapper.style.height = `${window.innerHeight}px`;
+nav.style.height = `${window.innerHeight}px`;
+
 
 const today = new Date().toISOString().slice(0, 10);
-
 let counterNumber;
-
 let historyLoad = false;
 
 const counterReload = () => {
@@ -31,6 +41,12 @@ const counterReload = () => {
 
 const storageReload = () => {
     localStorage.setItem(today, JSON.stringify(counterNumber));
+}
+
+const goToSection = (section, klasa) => {
+    section.classList.toggle(klasa);
+    nav.classList.toggle("nav--active");
+    menuButton.classList.toggle("is-active");
 }
 
 const historyDates = () => {
@@ -66,8 +82,13 @@ removeButton.addEventListener("click", () => {
     storageReload();
 })
 
-historyButton.addEventListener("click", () => {
-    history.classList.add("history--active");
+menuButton.addEventListener("click", () => {
+    menuButton.classList.toggle("is-active");
+    nav.classList.toggle("nav--active");
+});
+
+historyLink.addEventListener("click", () => {
+    goToSection(history, "history--active");
 
     if (!historyLoad) {
         historyLoad = true;
@@ -76,6 +97,7 @@ historyButton.addEventListener("click", () => {
 
             const amount = JSON.parse(localStorage.getItem(day));
 
+            const historyList = document.querySelector(".history__list");
             const historyItem = document.createElement("li");
             const historyDay = document.createElement("p");
             const historyNumber = document.createElement("p");
@@ -94,6 +116,13 @@ historyButton.addEventListener("click", () => {
     }
 })
 
-headerTitle.addEventListener("click", () => {
-    history.classList.remove("history--active");
+settingsLink.addEventListener("click", () => {
+    goToSection(settings, "settings--active");
+})
+
+backButtonHistory.addEventListener("click", () => {
+    history.classList.toggle("history--active");
+})
+backButtonSettings.addEventListener("click", () => {
+    settings.classList.toggle("settings--active");
 })
