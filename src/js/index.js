@@ -25,8 +25,10 @@ const removeButton = document.querySelector(".button--remove");
 const historyLink = document.querySelector(".nav__link--history");
 const settingsLink = document.querySelector(".nav__link--settings");
 
-const backButtonHistory = document.querySelector(".section__arrow--history");
-const backButtonSettings = document.querySelector(".section__arrow--settings");
+const backButtonHistory = document.querySelector(".arrow--history");
+const backButtonSettings = document.querySelector(".arrow--settings");
+
+const hamburger = document.querySelector(".hamburger__inner");
 
 wrapper.style.height = `${window.innerHeight}px`;
 nav.style.height = `${window.innerHeight}px`;
@@ -52,7 +54,7 @@ const storageReload = () => {
 const goToSection = (section, klasa) => {
     section.classList.toggle(klasa);
     nav.classList.toggle("nav--active");
-    menuButton.classList.toggle("is-active");
+    hamburger.classList.toggle("hamburger__inner--active");
 }
 
 const historyDates = () => {
@@ -96,7 +98,7 @@ removeButton.addEventListener("click", () => {
 })
 
 menuButton.addEventListener("click", () => {
-    menuButton.classList.toggle("is-active");
+    hamburger.classList.toggle("hamburger__inner--active");
     nav.classList.toggle("nav--active");
 });
 
