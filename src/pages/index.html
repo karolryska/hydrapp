@@ -72,8 +72,8 @@
     <header class="header">
       <h1 class="header__title">hydr<b>app</b></h1>
       <button class="hamburger hamburger--arrow-r header__menu-button" type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
+        <span class="hamburger__box">
+          <span class="hamburger__inner"></span>
         </span>
       </button>
       <nav class="nav">
@@ -93,7 +93,11 @@
     <section class="section section--history history">
       <header class="section__header">
         <h2 class="section__title">historia</h2>
-        <button class="section__arrow"></button>
+        <button class="arrow arrow--history" type="button">
+          <span class="arrow__box">
+            <span class="arrow__inner"></span>
+          </span>
+        </button>
       </header>
       <ul class="history__list">
       </ul>
@@ -101,11 +105,15 @@
     <section class="section section--settings settings">
       <header class="section__header">
         <h2 class="section__title">ustawienia</h2>
-        <button class="section__arrow"></button>
+        <button class="arrow arrow--settings" type="button">
+          <span class="arrow__box">
+            <span class="arrow__inner"></span>
+          </span>
+        </button>
       </header>
       <form action="" class="form">
         <p class="form__wrapper"><label class="form__label" for="glassCapacity">pojemność szklanki</label> <input
-            class="form__input form__input--glassCapacity" type="number" id="glassCapacity"></p>
+            class="form__input form__input--glassCapacity" type="number" id="glassCapacity" disabled></p>
         <p class="form__wrapper"><label class="form__label" for="dailyGoal">dzienny cel</label> <input
             class="form__input form__input--dailyGoal" type="number" id="dailyGoal"></p>
       </form>
