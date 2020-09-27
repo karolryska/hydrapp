@@ -14,6 +14,7 @@ const menuButton = document.querySelector(".header__menu-button");
 const nav = document.querySelector(".nav");
 
 const counter = document.querySelector(".counter__number");
+const counterUnits = document.querySelector(".counter__unit");
 
 const history = document.querySelector(".section--history");
 const settings = document.querySelector(".section--settings");
@@ -30,6 +31,11 @@ const backButtonSettings = document.querySelector(".section__arrow--settings");
 wrapper.style.height = `${window.innerHeight}px`;
 nav.style.height = `${window.innerHeight}px`;
 
+
+let settingsDetails = {
+    "glass": 200,
+    "goal": 12,
+}
 
 const today = new Date().toISOString().slice(0, 10);
 let counterNumber;
@@ -60,6 +66,13 @@ const historyDates = () => {
         const dateB = new Date(b);
         return dateB - dateA;
     });
+}
+
+
+if (JSON.parse(localStorage.getItem("userSettings"))) {
+    settingsDetails = JSON.parse(localStorage.getItem("userSettings"));
+} else {
+    console.log("brak ustawien");
 }
 
 if (JSON.parse(localStorage.getItem(today))) {
@@ -118,6 +131,8 @@ historyLink.addEventListener("click", () => {
 
 settingsLink.addEventListener("click", () => {
     goToSection(settings, "settings--active");
+    document.querySelector(".form__input--glassCapacity").value = settingsDetails.glass;
+    document.querySelector(".form__input--dailyGoal").value = settingsDetails.goal;
 })
 
 backButtonHistory.addEventListener("click", () => {
@@ -125,4 +140,7 @@ backButtonHistory.addEventListener("click", () => {
 })
 backButtonSettings.addEventListener("click", () => {
     settings.classList.toggle("settings--active");
+    settingsDetails.glass = document.querySelector(".form__input--glassCapacity").value;
+    settingsDetails.goal = document.querySelector(".form__input--dailyGoal").value;
+    localStorage.setItem("userSettings", JSON.stringify(settingsDetails));
 })
