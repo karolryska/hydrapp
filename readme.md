@@ -1,8 +1,8 @@
-# hydrapp
+# hydrapp :sweat_drops:
 Count glasses of water drinking during the day and check history.
 
 ## About
-Simple PWA application using localStorage. Based on wtf-webpack-starter.
+Simple PWA application using localStorage. Based on wtf-webpack-starter kit.
 With this app I'd like to learn how to use localStorage and how PWA works.
 
 ## Technologies and tools
@@ -18,10 +18,9 @@ Project is currently in progress.
 
 To do:
 - implement PWA
-- add setting section
-- implement design
-- adjust to desktops
 - OpenGraph - add suitable metadata
+- clean scss code
+- add page transitions and animations
 
 ## Setup
 To run this project you need Node.js with npm installed.
