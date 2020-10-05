@@ -43,7 +43,6 @@ let settingsDetails = {
 
 const today = new Date().toISOString().slice(0, 10);
 let counterNumber;
-let historyLoad = false;
 
 const counterReload = () => {
     counter.textContent = counterNumber;
@@ -106,32 +105,28 @@ menuButton.addEventListener("click", () => {
 
 historyLink.addEventListener("click", () => {
     goToSection(history, "history--active");
+    document.querySelector(".history__list").textContent = "";
 
-    if (!historyLoad) {
-        historyLoad = true;
+    historyDates().forEach(day => {
+        const amount = JSON.parse(localStorage.getItem(day));
 
-        historyDates().forEach(day => {
+        const historyList = document.querySelector(".history__list");
+        const historyItem = document.createElement("li");
+        const historyDay = document.createElement("p");
+        const historyNumber = document.createElement("p");
 
-            const amount = JSON.parse(localStorage.getItem(day));
+        historyList.appendChild(historyItem);
+        historyItem.appendChild(historyDay);
+        historyItem.appendChild(historyNumber);
 
-            const historyList = document.querySelector(".history__list");
-            const historyItem = document.createElement("li");
-            const historyDay = document.createElement("p");
-            const historyNumber = document.createElement("p");
+        historyItem.classList.add("history__item");
+        historyDay.classList.add("history__day");
+        historyNumber.classList.add("history__number");
 
-            historyList.appendChild(historyItem);
-            historyItem.appendChild(historyDay);
-            historyItem.appendChild(historyNumber);
-
-            historyItem.classList.add("history__item");
-            historyDay.classList.add("history__day");
-            historyNumber.classList.add("history__number");
-
-            historyDay.textContent = day;
-            historyNumber.textContent = amount;
-        });
-    }
-})
+        historyDay.textContent = day;
+        historyNumber.textContent = amount;
+    })
+});
 
 settingsLink.addEventListener("click", () => {
     goToSection(settings, "settings--active");
@@ -142,6 +137,7 @@ settingsLink.addEventListener("click", () => {
 backButtonHistory.addEventListener("click", () => {
     history.classList.toggle("history--active");
 })
+
 backButtonSettings.addEventListener("click", () => {
     settings.classList.toggle("settings--active");
     settingsDetails.glass = document.querySelector(".form__input--glassCapacity").value;
