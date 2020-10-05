@@ -17,8 +17,6 @@ With this app I'd like to learn how to use localStorage and how PWA works.
 Project is currently in progress.
 
 To do:
-- implement PWA
-- OpenGraph - add suitable metadata
 - clean scss code
 - add page transitions and animations
 
